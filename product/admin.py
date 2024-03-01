@@ -4,8 +4,6 @@ from django.contrib.admin import ModelAdmin
 from .models import Product
 
 
-# Register your models here.
-
 class ProductAdmin(ModelAdmin):
     list_display = ('title', 'created_at', 'material', 'color', 'painting_style')
     list_filter = ('created_at',)
