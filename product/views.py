@@ -1,16 +1,17 @@
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
-from django.urls import reverse
 
 from product.models import Product
 
 
-def index(request):  # correct
+# refers to homepage
+def index(request):
     return render(request, 'art/index.html', {})
 
 
-def list_of_products(request):  # correct
+# shows all the products available in website
+def list_of_products(request):
     products = Product.objects.all()
     context = {
         'products': products
@@ -23,6 +24,8 @@ def list_of_products(request):  # correct
     If the user has already favorited the product, remove him/her
     If the user has not favorited the product yet, add him/her 
 '''
+
+
 @login_required
 def favourites(request, product_id):
     product = get_object_or_404(Product, id=request.POST.get('fav'))
@@ -44,6 +47,7 @@ def product_favourite_list(request):
     return render(request, 'products/product_favourite_list.html', context)
 
 
+# shows details of a product
 def product_detail(request, id):
     product = Product.objects.get(id=id)
     is_favorites = False
